@@ -12,20 +12,28 @@ class Time:
         self.hour = hour
         self.minute = minute
         self.second = second
-    
+
+    def __str__(self):
+        '''Return a string representation for the object self'''
+        return f'{self.hour:02d}:{self.minute:02d}:{self.second:02d}'
+
+    def __repr__(self):
+        '''return a string representation for the object self'''
+        '''just instead of ':', you are required use the '.'  in the formatting string.'''
+        return f'{self.hour:02d}.{self.minute:02d}.{self.second:02d}'
+   
     def format_time(self):
         """Return time object (self) as a formatted string"""
         return f'{self.hour:02d}:{self.minute:02d}:{self.second:02d}'
     
     def sum_times(self, t2):
-        """Add two time objests and return the sum."""
+        """Add two time objects and return the sum."""
         """Change this to become object method for our Time object (refer to lab7c.py and change_time() method below)"""
         sum = Time(0, 0, 0)
         sum.hour = self.hour + t2.hour
         sum.minute = self.minute + t2.minute
         sum.second = self.second + t2.second
 
-        # Fix the carry over for seconds and minutes
         while sum.second >= 60:
             sum.second -= 60
             sum.minute += 1
@@ -35,6 +43,10 @@ class Time:
             sum.hour += 1
 
         return sum
+
+    def __add__(self, t2):
+        """Return the result by using sum_times() method"""
+        return self.sum_times(t2)
 
     def change_time(self, seconds):
         """Modify the time object by adding seconds."""
